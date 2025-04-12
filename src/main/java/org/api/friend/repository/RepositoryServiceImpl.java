@@ -1,29 +1,50 @@
 package org.api.friend.repository;
 
 
+import ch.qos.logback.core.testUtil.RandomUtil;
+import lombok.val;
+import org.api.friend.config.HibernateUtil;
 import org.api.friend.model.Friend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Repository
 public class RepositoryServiceImpl implements RepositoryService {
+    private final HibernateUtil hibernateUtil;
+
+    public RepositoryServiceImpl(HibernateUtil hibernateUtil) {
+        this.hibernateUtil = hibernateUtil;
+    }
 
     private static final Logger log = LoggerFactory.getLogger(RepositoryServiceImpl.class);
 
-    List<Friend> friends = new ArrayList<>();
 
     @Override
     public void add(Friend friend) {
-        friends.add(friend);
-        log.info("Сохранили юзера: {}", friend);
+        val sessionFactory = hibernateUtil.buildSessionFactory();
+        try (val session = sessionFactory.openSession();) {
+            session.beginTransaction();
+            session.persist(Friend.builder()
+                    .id(RandomUtil.getPositiveInt())
+                    .name(friend.getName())
+                    .age(friend.getAge())
+                    .priority(friend.getPriority())
+                    .hobby(friend.getHobby())
+                    .build());
+            session.getTransaction().commit();
+            log.info("Сохранили юзера: {}", friend);
+        } catch (Exception ignored) {
+        }
     }
 
     @Override
-    public Friend findByName(String name) {
-        return friends.stream().filter(f -> f.getName().equals(name)).findFirst().orElse(null);
+    public Friend findByName(String id) {
+        val sessionFactory = hibernateUtil.buildSessionFactory();
+        val session = sessionFactory.openSession();
+        session.beginTransaction();
+        val friend = session.get(Friend.class, id);
+        System.out.println(friend);
+        return friend;
     }
 }

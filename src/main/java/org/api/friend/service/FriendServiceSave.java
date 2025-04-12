@@ -1,20 +1,21 @@
 package org.api.friend.service;
 
-import org.api.friend.dao.FriendResponse;
+import jakarta.annotation.PreDestroy;
+import org.api.friend.executerProvider.ExecuteServiceProvider;
 import org.api.friend.mapper.FriendMapper;
 import org.api.friend.model.Friend;
 import org.api.friend.repository.RepositoryService;
-import org.api.friend.repository.RepositoryServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.ExecutorService;
 
 @Service
 public class FriendServiceSave {
+    ExecutorService executor = ExecuteServiceProvider.getExecutorService();
 
     private static final Logger log = LoggerFactory.getLogger(FriendServiceSave.class);
-
     private RepositoryService repositoryService;
     private FriendMapper friendMapper;
 
@@ -24,9 +25,9 @@ public class FriendServiceSave {
     }
 
 
-    public FriendResponse save(Friend friend) {
-        repositoryService.add(friend);
-        log.info("Сохранили юзера с именем: {}", friend.getName());
-        return friendMapper.friendToResponse(friend);
+    public void save(Friend friend) {
+        executor.execute(() -> {
+            repositoryService.add(friend);
+        });
     }
 }

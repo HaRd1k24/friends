@@ -1,0 +1,3 @@
+spring:
+  fixed:
+    thread: 10

@@ -1,19 +1,25 @@
 package org.api.friend.controller;
 
-import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
 import org.api.friend.dao.FriendResponse;
 import org.api.friend.model.Friend;
 import org.api.friend.service.FriendServiceSave;
 import org.api.friend.service.FriendServiceSearch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @RestController
 public class FriendController {
     private static final Logger log = LoggerFactory.getLogger(FriendController.class);
+
+    private final ExecutorService executorService = Executors.newFixedThreadPool(5);
 
     private final FriendServiceSave friendServiceSave;
     private final FriendServiceSearch friendServiceSearch;
@@ -24,15 +30,15 @@ public class FriendController {
     }
 
     @PostMapping(value = "api/v1/friends", produces = "application/json", consumes = "application/json")
-    public ResponseEntity<FriendResponse> addFriend(@RequestBody Friend friend) {
-        FriendResponse save = friendServiceSave.save(friend);
-        return ResponseEntity.ok().body(save);
+    public String addFriend(@Valid @RequestBody Friend friend) {
+        friendServiceSave.save(friend);
+        return "Сохраняем юзера";
     }
 
-    @GetMapping(value = "api/v1/friend/{name}", produces = "application/json")
-    public ResponseEntity<FriendResponse> addFriend(@PathVariable String name) {
-        FriendResponse save = friendServiceSearch.searchByName(name);
-        return ResponseEntity.ok().body(save);
+    @GetMapping(value = "api/v1/friend/{id}", produces = "application/json")
+    public String addFriend(@PathVariable String id) {
+        friendServiceSearch.searchByName(id);
+        return "Ищем юзера";
     }
 
 }

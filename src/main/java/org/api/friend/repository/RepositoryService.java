@@ -5,5 +5,5 @@ public interface RepositoryService {
 
      void add(Friend friend);
 
-     Friend findByName(String name);
+     Friend findByName(String id);
 }
