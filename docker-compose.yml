@@ -2,6 +2,8 @@ version: '3.8'
 
 services:
   friends:
+    depends_on:
+      - postgres
     build: ./
     ports:
       - "8080:8080"
@@ -10,17 +12,13 @@ services:
     image: postgres:13
     container_name: postgres_db
     environment:
+      CONNECTION_DRIVER_CLASS: org.postgresql.Driver
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: "1998132"
       POSTGRES_DB: postgres
       PGDATA: "/var/lib/postgresql/data/pgdata"
     ports:
-      - "5432:5432"
-    networks:
-      - postgres
-
-volumes:
-  pgadmin-data:
+      - "5433:5432"
 
 networks:
   postgres:

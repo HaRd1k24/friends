@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HibernateUtil {
+
     public SessionFactory buildSessionFactory() {
         Configuration configuration = buildConfiguration();
         configuration.configure();
