@@ -1,4 +1,5 @@
-package org.api.friend.model;
+package org.api.friendmodel;
+
 
 
 import jakarta.persistence.*;
@@ -24,7 +25,5 @@ public class Friend {
     private Integer priority;
     @NotEmpty(message = "hobby обязательное поле и не может быть пустое или null")
     private String hobby;
-
-
 }
 

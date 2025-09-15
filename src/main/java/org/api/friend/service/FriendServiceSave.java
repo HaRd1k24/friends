@@ -1,10 +1,11 @@
-package org.api.friend.service;
+package main.java.org.api.friend.service;
 
 import jakarta.annotation.PreDestroy;
+import main.java.org.api.friend.mapper.FriendMapper;
+import main.java.org.api.friend.repository.RepositoryService;
 import org.api.friend.executerProvider.ExecuteServiceProvider;
-import org.api.friend.mapper.FriendMapper;
-import org.api.friend.model.Friend;
-import org.api.friend.repository.RepositoryService;
+
+import org.api.friendmodel.Friend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

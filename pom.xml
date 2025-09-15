@@ -8,8 +8,10 @@
         <version>3.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <packaging>pom</packaging>
+
     <groupId>org.api</groupId>
-    <artifactId>friend</artifactId>
+    <artifactId>friends</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>friends</name>
     <description>friends</description>
@@ -75,6 +77,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.api</groupId>
+            <artifactId>friend-model</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -127,5 +135,8 @@
             </plugin>
         </plugins>
     </build>
+    <modules>
+        <module>friend-model</module>
+    </modules>
 
 </project>

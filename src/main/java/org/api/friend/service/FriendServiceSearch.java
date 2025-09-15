@@ -1,9 +1,10 @@
-package org.api.friend.service;
+package main.java.org.api.friend.service;
 
+import main.java.org.api.friend.repository.RepositoryService;
 import org.api.friend.exception.NotFoundFriendException;
 import org.api.friend.executerProvider.ExecuteServiceProvider;
-import org.api.friend.model.Friend;
-import org.api.friend.repository.RepositoryService;
+
+import org.api.friendmodel.Friend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

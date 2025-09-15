@@ -1,10 +1,11 @@
-package org.api.friend.repository;
+package main.java.org.api.friend.repository;
 
 
 import ch.qos.logback.core.testUtil.RandomUtil;
 import lombok.val;
+import main.java.org.api.friend.repository.RepositoryService;
 import org.api.friend.config.HibernateUtil;
-import org.api.friend.model.Friend;
+import org.api.friendmodel.Friend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;

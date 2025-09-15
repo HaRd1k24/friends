@@ -1,7 +1,7 @@
-package org.api.friend.mapper;
+package main.java.org.api.friend.mapper;
 
 import org.api.friend.dao.FriendResponse;
-import org.api.friend.model.Friend;
+import org.api.friendmodel.Friend;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 

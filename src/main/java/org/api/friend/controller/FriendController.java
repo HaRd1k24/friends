@@ -1,9 +1,10 @@
-package org.api.friend.controller;
+package main.java.org.api.friend.controller;
 
 import jakarta.validation.Valid;
-import org.api.friend.model.Friend;
-import org.api.friend.service.FriendServiceSave;
-import org.api.friend.service.FriendServiceSearch;
+
+import main.java.org.api.friend.service.FriendServiceSave;
+import main.java.org.api.friend.service.FriendServiceSearch;
+import org.api.friendmodel.Friend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
